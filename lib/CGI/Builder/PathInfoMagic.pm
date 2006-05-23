@@ -3,7 +3,7 @@ package CGI::Builder::PathInfoMagic;
 use strict;
 use base qw/CGI::Builder/;
 use vars qw/$VERSION/;
-$VERSION = '0.01';
+$VERSION = '0.02';
 
 sub process {
     my $s  = shift;
@@ -26,10 +26,10 @@ CGI::Builder::PathInfoMagic - Get page name from PAHT_INFO instead of p
 
 =head1 DESCRIPTION
 
-This module allow you to set page name from $ENV{PATH_INFO} instead of p. You can check
-SYNOPSYS out and you will know what this mean. :-) 
+This module allow you to set page name from $ENV{PATH_INFO} instead of
+p(Qerystring). You can check SYNOPSYS out and you will know what this mean. :-) 
 
-This class inherits from CGI::Builder,  by the way. I like CGI::Builder.
+This class inherits from CGI::Builder, I love CGI::Builder.
 
 =head1 SYNOPSYS
 
@@ -60,7 +60,7 @@ Your CGI::Builder Package.
  
  sub PH_hoge {
     my $s = shift;
-    $s->page_content = 'my URL is http://localhost/script.cgi/hoge/ !!!' );
+    $s->page_content = 'my URL is http://localhost/script.cgi/hoge/ !!!' ;
  }
 
 
@@ -83,7 +83,7 @@ Use ScriptAlias !!! This allow you to hide .cgi extension. Very fun.
     $s->page_content = 'my URL is http://localhost/secure/foo/bar/?foo=whatever !!!' ;
  }
 
-=head1 OVER RAIDDEDMETHOD
+=head1 Override METHOD
 
 =head2 process()
 

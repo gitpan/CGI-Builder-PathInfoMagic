@@ -2,13 +2,13 @@ use strict;
 use warnings;
 
 use Test::More qw/no_plan/;
-use Test::Exception;
+use Test::Output;
 
 my $app = BOO->new();
 
 $ENV{PATH_INFO} = '/foo/xxx';
 
-throws_ok( 
+stdout_like( 
     sub {$app->process() },
     qr/foo_xxx/,
     '/foo/xxx map to PH_foo_xxx'
@@ -16,7 +16,7 @@ throws_ok(
 
 $ENV{PATH_INFO} = '/foo/xxx/bar';
 
-throws_ok(
+stdout_like(
     sub {$app->process() },
     qr/foo_xxx_bar/,
     '/foo/xxx/bar map to PH_fff_xxx_bar'
@@ -26,7 +26,7 @@ throws_ok(
 $ENV{PATH_INFO} = '/';
 
 
-throws_ok(
+stdout_like(
     sub {$app->process() },
     qr/index/,
     '/ map to PH_index'
@@ -41,14 +41,15 @@ use warnings;
 use CGI::Builder::PathInfoMagic;
 
 sub PH_foo_xxx {
-    die 'foo_xxx';
+    shift->page_content =  'foo_xxx';
 }
 
 sub PH_foo_xxx_bar {
-    die 'foo_xxx_bar';
+    shift->page_content =  'foo_xxx_bar';
+    
 }
 
 sub PH_index {
-    die 'index';
+    shift->page_content =  'index';
 }
 1;
